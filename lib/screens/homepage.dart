@@ -5,6 +5,7 @@ import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:parkmandu/screens/markerInfoBottomSheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   final Set<Marker> _markers = {};
   late GoogleMapController mapController;
 
-  CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
 
   @override
   void initState() {
@@ -49,21 +49,15 @@ class _HomePageState extends State<HomePage> {
                   title: doc['availableslots'].toString()+"/"+doc['totalslots'].toString(),
                 ),
                 onTap: (){
-                  _customInfoWindowController.addInfoWindow!(
-                    Container(
-                      color: Colors.blue,
-                      child: Column(
-                        children: [
-                          Text("Name: " + doc['name']),
-                          //Text("Total slots: " + doc['totalslots']),
-                          //Text("Occupied slots: " + doc['occupiedslots']),
-                          //Text("Available slots: " + doc['availableslots']),
-
-                        ],
-                      ),
-                    ),
-                      LatLng(doc['latlng'].latitude, doc['latlng'].longitude)
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (BuildContext context) {
+                      return MarkerInfoBottomSheet(name: doc['name'],location: doc['location'], availableslots: doc['availableslots'], occupiedslots: doc['occupiedslots'], price: doc['price']);
+                    },
                   );
+                  //bottomSheet(doc['name'], doc['location'], doc['availableslots'], doc['occupiedslots'], doc['price']);
                 }
               );
               _markers.add(marker);
@@ -81,21 +75,14 @@ class _HomePageState extends State<HomePage> {
 
                   onMapCreated: (GoogleMapController controller) {
                     setState(() {
-                      _customInfoWindowController.googleMapController = controller;
+
                     });
                   },
                   onTap: (position){
-                    _customInfoWindowController.hideInfoWindow!();
+
                   },
                 ),
 
-                CustomInfoWindow(
-                  controller: _customInfoWindowController,
-                  height: 250,
-                  width: 200,
-                  //width: size.width,
-                  offset: 35,
-                )
 
               ],
             );
@@ -104,30 +91,6 @@ class _HomePageState extends State<HomePage> {
     );
 
   }
-
-
-  /*Future<void> _getParkings() async{
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('parkings').get();
-    if(querySnapshot.docs.isNotEmpty){
-      querySnapshot.docs.forEach((doc) {
-        print("Helloooooooooo");
-        print(doc.id);
-        print(doc['name']);
-        var marker = Marker(
-          markerId: MarkerId(doc.id),
-          position: LatLng(doc['latlng'].latitude, doc['latlng'].longitude),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          infoWindow: InfoWindow(
-            title: doc['name'],
-          ),
-
-        );
-        setState(() {
-          _markers.add(marker);
-        });
-      });
-    }
-  }*/
 
   Future<void> getCurrentLocation() async{
     bool _serviceEnabled;
