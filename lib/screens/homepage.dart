@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:parkmandu/screens/markerInfoBottomSheet.dart';
+import 'package:parkmandu/widgets/expandedBottomSheet.dart';
+import 'package:parkmandu/widgets/markerInfoBottomSheet.dart';
+import 'package:search_map_place_updated/search_map_place_updated.dart';
+
+import '../widgets/menuDrawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,9 +37,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+        drawer: MenuDrawer(),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('parkings').snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+          //BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot
+          builder: (context, snapshot){
             if(!snapshot.hasData){
               return Text('Loading');
             }
@@ -51,13 +56,13 @@ class _HomePageState extends State<HomePage> {
                 onTap: (){
                   showModalBottomSheet(
                     isScrollControlled: true,
+                    isDismissible: true,
                     context: context,
                     backgroundColor: Colors.transparent,
                     builder: (BuildContext context) {
                       return MarkerInfoBottomSheet(name: doc['name'],location: doc['location'], availableslots: doc['availableslots'], occupiedslots: doc['occupiedslots'], price: doc['price']);
                     },
                   );
-                  //bottomSheet(doc['name'], doc['location'], doc['availableslots'], doc['occupiedslots'], doc['price']);
                 }
               );
               _markers.add(marker);
@@ -72,17 +77,72 @@ class _HomePageState extends State<HomePage> {
                     zoom: 13,
                   ),
                   markers: _markers,
-
+                  mapToolbarEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     setState(() {
-
                     });
                   },
                   onTap: (position){
-
                   },
                 ),
-
+                Positioned(
+                  top: 30,
+                  left: 10,
+                  right: 15,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF1E1E1E),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: IconButton(
+                          iconSize: 30,
+                            onPressed: (){
+                              Scaffold.of(context).openDrawer();
+                            },
+                            icon: Icon(Icons.menu, color: Colors.white,),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        width: size.width*0.72,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: SearchMapPlaceWidget(
+                          bgColor: Colors.transparent,
+                          textColor: Colors.grey,
+                          hasClearButton: true,
+                          iconColor: Colors.grey,
+                          placeType: PlaceType.address,
+                          language: 'en',
+                          placeholder: 'Search location',
+                          apiKey: "AIzaSyCMbI8Qkc2r-I3dVUitA8UzrEmqj4TDrl4",
+                          onSelected: (Place place) async {
+                            Geolocation? geolocation = await place.geolocation;
+                            mapController.animateCamera(
+                                CameraUpdate.newLatLng(geolocation?.coordinates)
+                            );
+                            mapController.animateCamera(
+                                CameraUpdate.newLatLngBounds(geolocation?.bounds, 0)
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
 
               ],
             );
@@ -130,10 +190,6 @@ class _HomePageState extends State<HomePage> {
     });
 
   }
-
-
-
-
 
 }
 
