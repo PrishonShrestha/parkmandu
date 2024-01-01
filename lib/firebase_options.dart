@@ -52,6 +52,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '579556373521',
     projectId: 'parkmandu-4e7f1',
     authDomain: 'parkmandu-4e7f1.firebaseapp.com',
+    databaseURL: 'https://parkmandu-4e7f1-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'parkmandu-4e7f1.appspot.com',
   );
 
@@ -60,6 +61,7 @@ class DefaultFirebaseOptions {
     appId: '1:579556373521:android:196cef2840134a1242adb0',
     messagingSenderId: '579556373521',
     projectId: 'parkmandu-4e7f1',
+    databaseURL: 'https://parkmandu-4e7f1-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'parkmandu-4e7f1.appspot.com',
   );
 
@@ -68,7 +70,9 @@ class DefaultFirebaseOptions {
     appId: '1:579556373521:ios:52db5a2745e0556f42adb0',
     messagingSenderId: '579556373521',
     projectId: 'parkmandu-4e7f1',
+    databaseURL: 'https://parkmandu-4e7f1-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'parkmandu-4e7f1.appspot.com',
+    iosClientId: '579556373521-v2g40p7p8slmffaci1dro1nb3pmlfto4.apps.googleusercontent.com',
     iosBundleId: 'com.example.parkmandu',
   );
 }

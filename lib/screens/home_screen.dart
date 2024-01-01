@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:parkmandu/widgets/expandedBottomSheet.dart';
 import 'package:parkmandu/widgets/markerInfoBottomSheet.dart';
 import 'package:search_map_place_updated/search_map_place_updated.dart';
 
@@ -31,8 +30,6 @@ class _HomePageState extends State<HomePage> {
     getCurrentLocation();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -49,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               var marker = Marker(
                 markerId: MarkerId(doc.id),
                 position: LatLng(doc['latlng'].latitude, doc['latlng'].longitude),
-                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+                icon: doc['availableslots']==0 ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange) : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
                 infoWindow: InfoWindow(
                   title: doc['availableslots'].toString()+"/"+doc['totalslots'].toString(),
                 ),
@@ -60,7 +57,8 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     backgroundColor: Colors.transparent,
                     builder: (BuildContext context) {
-                      return MarkerInfoBottomSheet(name: doc['name'],location: doc['location'], availableslots: doc['availableslots'], occupiedslots: doc['occupiedslots'], price: doc['price']);
+                      return MarkerInfoBottomSheet(name: doc['name'],location: doc['location'], availableslots: doc['availableslots'], occupiedslots: doc['occupiedslots'],
+                        price: doc['price'], contact: doc['contact'], parkingLocation: doc['latlng'], information: doc['information'], imageUrl: doc['imageUrl'],);
                     },
                   );
                 }
@@ -71,6 +69,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GoogleMap(
                   mapType: MapType.normal,
+                  compassEnabled: false,
                   initialCameraPosition: CameraPosition(
                     target: _currentP!,
                     //target: LatLng(27.700769, 85.300140),
@@ -80,6 +79,7 @@ class _HomePageState extends State<HomePage> {
                   mapToolbarEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     setState(() {
+                      mapController = controller;
                     });
                   },
                   onTap: (position){

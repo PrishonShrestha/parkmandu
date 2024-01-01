@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "579556373521",
+    "firebase_url": "https://parkmandu-4e7f1-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "parkmandu-4e7f1",
     "storage_bucket": "parkmandu-4e7f1.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.parkmandu"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "579556373521-3qmb0c70nmb7fehsf11e33ama7m2qi7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.parkmandu",
+            "certificate_hash": "ea114318dc4c99c7ffd9c8b850bb96b051e2968e"
+          }
+        },
+        {
+          "client_id": "579556373521-d43h1cvo9csdalhdbnsj9n4v0mn0ab6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC26UEJ8W4FEksyVkm-PYOQDkY2z4iPsdc"
@@ -20,7 +34,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579556373521-d43h1cvo9csdalhdbnsj9n4v0mn0ab6m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "579556373521-v2g40p7p8slmffaci1dro1nb3pmlfto4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.parkmandu"
+              }
+            }
+          ]
         }
       }
     }
