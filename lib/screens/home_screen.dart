@@ -152,6 +152,7 @@ class _HomePageState extends State<HomePage> {
 
   }
 
+  //Function to get currrent location of users
   Future<void> getCurrentLocation() async{
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;

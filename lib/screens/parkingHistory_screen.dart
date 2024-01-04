@@ -17,7 +17,7 @@ class _ParkingHistoryState extends State<ParkingHistory> {
   Future<void> searchParkingHistory() async {
     String rfidNumber = _txtCardNumber.text;
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('parking_info').doc("79yuoUXhcRdMJ32F3yyp").collection('vehicle_details')
+        .collection('parking_history')
         .where('userid', isEqualTo: rfidNumber)
         .get();
 

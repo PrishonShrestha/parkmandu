@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -248,11 +247,6 @@ class MarkerInfoBottomSheet extends StatelessWidget {
   }
 
   Future<void> launchGoogleMap(String url) async {
-    /*String _latitude = latlng.latitude as String;
-    String _longitude = latlng.latitude as String;
-    print("lalitude"+ _latitude);
-    print("Longitude"+_longitude);
-    String url = "https://www.google.com/maps/search/?api=1&query=$_latitude, $_longitude";*/
     print("Url -----------------"+url);
     Uri googleUrl = Uri(
       path: url,

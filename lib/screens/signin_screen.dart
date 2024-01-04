@@ -64,30 +64,10 @@ class SignInScreen extends StatelessWidget {
       ),
     );
 
-    /*Container(
-      decoration: BoxDecoration(
-
-      ),
-      child: Center(
-          child: ElevatedButton.icon(
-            onPressed: (){
-              final provider = Provider.of<AuthController>(context, listen: false);
-              provider.signInWithGoogle();
-            },
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(size.width*0.7, 60),
-              backgroundColor: Color(0xFFF8F4E9),
-              textStyle: TextStyle(fontSize: 18),
-              foregroundColor: Colors.black,
-            ),
-            icon: Icon(Icons.headphones),
-            label: Text("Sign in with google"),
-          )
-      ),
-    );*/
   }
 }
 
+// Background design
 class WaveClipper extends CustomClipper<Path>{
   @override
   Path getClip(Size size){

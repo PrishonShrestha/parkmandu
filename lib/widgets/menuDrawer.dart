@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkmandu/screens/aboutUs_screen.dart';
 import 'package:parkmandu/screens/parkingHistory_screen.dart';
+import 'package:parkmandu/screens/userGuide_screen.dart';
 import 'package:provider/provider.dart';
 import '../controllers/auth_controller.dart';
 
@@ -75,6 +76,10 @@ class MenuDrawer extends StatelessWidget {
                 title: Text('User guide', style: GoogleFonts.oswald(fontSize: 18, color: Color(0xFF1E1E1E)),),
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context)=> UserGuideScreen()),
+                  );
                 },
               ),
               ListTile(

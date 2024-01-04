@@ -19,7 +19,7 @@ class AboutUs extends StatelessWidget {
         height: size.height,
         width: size.width,
         child: Text(
-          "Parkmandu is an IoT based smart parking system that uses RFID technology to keep track of vehicles entering and exiting the parking space and based on that, it displays the real time information of the parking availability to the application users.",
+          "Parkmandu is an mobile application that displays the details information of parking spaces nearby your current location",
           textAlign: TextAlign.center,
           style: GoogleFonts.playfairDisplay(
             fontSize: 18,
