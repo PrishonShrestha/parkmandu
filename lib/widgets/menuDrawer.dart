@@ -42,10 +42,13 @@ class MenuDrawer extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 20,),
-                    Text(
-                      user?.displayName ??
-                      "Username",
-                      style: GoogleFonts.lora(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                    Container(
+                      width: size.width*0.35,
+                      child: Text(
+                        user?.displayName ??
+                        "Username",
+                        style: GoogleFonts.lora(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -53,7 +56,7 @@ class MenuDrawer extends StatelessWidget {
               Container(height: 20, color: Color(0xFFADD8E6),),
               SizedBox(height:20),
               ListTile(
-                title: Text('Parking history'),
+                title: Text('Parking history', style: GoogleFonts.oswald(fontSize: 18, color: Color(0xFF1E1E1E)),),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -69,13 +72,13 @@ class MenuDrawer extends StatelessWidget {
                 endIndent: 5,
               ),*/
               ListTile(
-                title: Text('User guide'),
+                title: Text('User guide', style: GoogleFonts.oswald(fontSize: 18, color: Color(0xFF1E1E1E)),),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('About us'),
+                title: Text('About us', style: GoogleFonts.oswald(fontSize: 18, color: Color(0xFF1E1E1E)),),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(

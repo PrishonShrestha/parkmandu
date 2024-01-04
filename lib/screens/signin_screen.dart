@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../controllers/auth_controller.dart';
 
@@ -27,20 +28,35 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: (){
-                  final provider = Provider.of<AuthController>(context, listen: false);
-                  provider.signInWithGoogle();
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(size.width*0.7, 60),
-                  backgroundColor: Color(0xFFF8F4E9),
-                  textStyle: TextStyle(fontSize: 18),
-                  foregroundColor: Colors.black,
-                ),
-                icon: Image.asset("assets/images/googleIcon.png", height: 35, width: 35,),
-                label: Text("Sign in with google"),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                      child: Text("Welcome!", style: GoogleFonts.prata(fontSize: 40, color: Colors.white))
+                  ),
+                  SizedBox(height: 10,),
+                  Text("Let's find the best parking space \nwith us",  style: GoogleFonts.satisfy(fontSize: 23, color: Colors.white),),
+                  SizedBox(height: 50,),
+                  ElevatedButton.icon(
+                    onPressed: (){
+                      final provider = Provider.of<AuthController>(context, listen: false);
+                      provider.signInWithGoogle();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(size.width*0.7, 60),
+                      backgroundColor: Color(0xFFF8F4E9),
+                      textStyle: TextStyle(fontSize: 18),
+                      foregroundColor: Colors.black,
+                    ),
+                    icon: Image.asset("assets/images/googleIcon.png", height: 35, width: 35,),
+                    label: Text("Sign in with google"),
+                  ),
+                  SizedBox(height: 80,),
+                ],
               ),
             ),
           ],
